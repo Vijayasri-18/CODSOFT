@@ -1,0 +1,34 @@
+def custom_random(seed):
+    """ Simple pseudo-random number generator based on a seed. """
+    seed = (seed * 32719 + 3) % 32749
+    return seed
+
+def get_char(index):
+    """ Returns a character from a predefined character set using index. """
+    chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*"
+    return chars[index % len(chars)]
+
+def generate_password(length):
+    """ Generates a random password of the given length. """
+    seed = 12345  # Initial seed value
+    password = ""
+
+    for _ in range(length):
+        seed = custom_random(seed)  # Generate next "random" number
+        password += get_char(seed)
+
+    return password
+
+# Main program
+def main():
+    try:
+        length = int(input("Enter password length: "))
+        if length <= 0:
+            print("Password length must be greater than zero.")
+        else:
+            print("Generated Password:", generate_password(length))
+    except ValueError:
+        print("Invalid input! Please enter a number.")
+
+if _name_ == "_main_":
+    main()
